@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inbox Intel — Pavol</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Poppins',sans-serif;background:#05024E;color:#fff;padding:16px;min-height:100vh;-webkit-font-smoothing:antialiased}
+
+  .header{padding:8px 0 16px;border-bottom:2px solid rgba(0,101,247,.3);margin-bottom:20px}
+  .header h1{font-size:22px;font-weight:700;background:linear-gradient(135deg,#0065F7,#00D4FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .header .sub{font-size:12px;color:rgba(255,255,255,.4);margin-top:2px}
+
+  .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:24px}
+  .stat{background:rgba(0,101,247,.08);border:1px solid rgba(0,101,247,.2);border-radius:12px;padding:12px;text-align:center}
+  .stat .n{font-size:28px;font-weight:700;color:#0065F7}
+  .stat .l{font-size:10px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.8px}
+  .stat.red .n{color:#FF4444}
+  .stat.yellow .n{color:#FFB800}
+
+  .section{margin-bottom:24px}
+  .section-title{font-size:14px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+  .badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:12px;font-weight:600}
+  .badge.red{background:#FF4444;color:#fff}
+  .badge.yellow{background:#FFB800;color:#000}
+  .badge.blue{background:#0065F7;color:#fff}
+
+  .card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px;margin-bottom:8px;position:relative}
+  .card .top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+  .card .subj{font-size:14px;font-weight:600;line-height:1.3}
+  .card .meta{font-size:11px;color:rgba(255,255,255,.35);margin-top:2px}
+  .card .snip{font-size:12px;color:rgba(255,255,255,.55);margin-top:6px;line-height:1.4}
+  .card .hint{font-size:11px;color:#0065F7;margin-top:5px;font-style:italic}
+
+  .pri{display:inline-block;padding:2px 7px;border-radius:6px;font-size:10px;font-weight:700;white-space:nowrap}
+  .pri.p1{background:#FF4444;color:#fff}
+  .pri.p2{background:#FFB800;color:#000}
+  .pri.p3{background:rgba(0,101,247,.25);color:#6BA5FF}
+
+  .days{font-size:10px;color:rgba(255,255,255,.3);white-space:nowrap;text-align:right}
+  .days.over{color:#FF4444}
+  .days.soon{color:#FFB800}
+  .days.today{color:#FF4444;font-weight:700}
+
+  .actions{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:4px;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;transition:all .15s}
+  .btn-send{background:#0065F7;color:#fff}
+  .btn-send:hover{background:#0050CC}
+  .btn-view{background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.12)}
+  .btn-view:hover{background:rgba(255,255,255,.12)}
+  .btn-done{background:rgba(76,175,80,.15);color:#4CAF50;border:1px solid rgba(76,175,80,.25)}
+
+  .divider{height:1px;background:rgba(0,101,247,.12);margin:20px 0}
+  .footer{text-align:center;font-size:10px;color:rgba(255,255,255,.2);padding:16px 0}
+
+  @media(min-width:640px){
+    body{padding:24px 40px;max-width:720px;margin:0 auto}
+    .stats{grid-template-columns:repeat(4,1fr)}
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Inbox Intelligence</h1>
+  <div class="sub">7. april 2026 07:30 CEST &bull; pavol.adamcak@dexfinity.com</div>
+</div>
+
+<div class="stats">
+  <div class="stat red"><div class="n">3</div><div class="l">Urgent</div></div>
+  <div class="stat yellow"><div class="n">11</div><div class="l">Awaiting</div></div>
+  <div class="stat"><div class="n">6</div><div class="l">Drafts Ready</div></div>
+  <div class="stat"><div class="n">5</div><div class="l">Deadlines</div></div>
+</div>
+
+<!-- ==================== DEADLINES ==================== -->
+<div class="section">
+  <div class="section-title">Deadlines <span class="badge red">DNES</span></div>
+
+  <div class="card">
+    <div class="top">
+      <div>
+        <div class="subj">GWS Renewal — Kinga/FOTC</div>
+        <div class="meta">kinga.boruta@fotc.com</div>
+        <div class="snip">Restructure 109 &rarr; 67 licencii. Kinga musi potvrdit pred renewal.</div>
+        <div class="hint">DNES je renewal date! Overiit ci potvrdila zmenu</div>
+      </div>
+      <div><div class="days today">DNES!</div><div class="pri p1">P1</div></div>
+    </div>
+    <div class="actions">
+      <a class="btn btn-view" href="https://mail.google.com/mail/u/0/#all/19cc3c71629b9636" target="_blank">Open Thread</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <div>
+        <div class="subj">Revolut Grow plan fee</div>
+        <div class="meta">Revolut Business</div>
+        <div class="snip">Nedostatok na ucte na pokrytie plan fee.</div>
+        <div class="hint">Dobit Revolut ucet do 10. aprila</div>
+      </div>
+      <div><div class="days soon">Apr 10</div><div class="pri p1">P1</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <div>
+        <div class="subj">Dexfinity web call — Brunovsky</div>
+        <div class="meta">pakobrunovsky@gmail.com</div>
+        <div class="snip">Meeting o webe. 9. april 10:00-10:30.</div>
+      </div>
+      <div><div class="days soon">Apr 9</div><div class="pri p2">P2</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <div>
+        <div class="subj">IVANKA ZS ZAPIS</div>
+        <div class="meta">Marka &bull; Osobny zapis do skoly</div>
+        <div class="snip">Piatok 10. aprila 14:00-17:00</div>
+      </div>
+      <div><div class="days soon">Apr 10</div><div class="pri p2">P2</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <div>
+        <div class="subj">Dialnicna znamka BT800EV</div>
+        <div class="meta">eznamka.sk</div>
+        <div class="snip">Notifikacia o expiracii. Obnovit.</div>
+      </div>
+      <div><div class="days soon">Expiring</div><div class="pri p2">P2</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== EXTERNAL — AWAITING ==================== -->
+<div class="section">
+  <div class="section-title">External — Awaiting Reply <span class="badge yellow">FOLLOW UP</span></div>
+
+  <div class="card">
+    <div class="top">
+      <div>
+        <div class="subj">Mamutex — neuhradene faktury</div>
+        <div class="meta">radim.bures@mamutex.com &bull; ~9 281 EUR+</div>
+        <div class="snip">Faktury po splatnosti (jan+feb). 5 dni bez odpovede.</div>
+        <div class="hint">MONEY — draft pripraveny na odoslanie</div>
+      </div>
+      <div><div class="days over">5 dni</div><div class="pri p1">P1</div></div>
+    </div>
+    <div class="actions">
+      <a class="btn btn-send" href="https://mail.google.com/mail/u/0/#drafts?compose=19d66972b92fd248" target="_blank">Review &amp; Send Draft</a>
+      <a class="btn btn-view" href="https://mail.google.com/mail/u/0/#all/19d4d390ce5c1f6c" target="_blank">Thread</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <div>
+        <div class="subj">Bomba Zlava — pravne urovnanie</div>
+        <div class="meta">kristak@kristak.sk &bull; patus.patrik1@gmail.com</div>
+        <div class="snip">Dostal si dalsi pravny dokument. Over s Kristakom stav.</div>
+      </div>
+      <div><div class="days over">6 dni</div><div class="pri p2">P2</div></div>
+    </div>
+    <div class="actions">
+      <a class="btn btn-view" href="https://mail.google.com/mail/u/0/#all/19d484e113986eb4" target="_blank">Open Thread</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <div>
+        <div class="subj">Detaility — Mamutex UX Redesign</div>
+        <div class="meta">hello@detaility.com (Daniel Celiga)</div>
+        <div class="snip">Feedback k hodinam a deliverables. Cakas na reakciu.</div>
+      </div>
+      <div><div class="days over">6 dni</div><div class="pri p2">P2</div></div>
+    </div>
+    <div class="actions">
+      <a class="btn btn-view" href="https://mail.google.com/mail/u/0/#all/19d1301fdc4d7ec6" target="_blank">Open Thread</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <div>
+        <div class="subj">PPC camp — vstupenka mena</div>
+        <div class="meta">ppccamp.sk@gmail.com</div>
+        <div class="snip">Vymazat mena ludi na vstupenke.</div>
+      </div>
+      <div><div class="days">1 den</div><div class="pri p3">P3</div></div>
+    </div>
+    <div class="actions">
+      <a class="btn btn-view" href="https://mail.google.com/mail/u/0/#all/19d643efbaee81c1" target="_blank">Open Thread</a>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== INTERNAL — AWAITING ==================== -->
+<div class="section">
+  <div class="section-title">Internal Team — Awaiting Reply <span class="badge blue">TRACK</span></div>
+
+  <div class="card">
+    <div class="top">
+      <div>
+        <div class="subj">Ondrej Liptak — Plan (Shopify, CreaAI)</div>
+        <div class="meta">ondrej.liptak@dexfinity.com</div>
+        <div class="snip">Cakas na jeho pohlad k planu. Draft follow-up pripraveny.</div>
+      </div>
+      <div><div class="days over">3 dni</div><div class="pri p2">P2</div></div>
+    </div>
+    <div class="actions">
+      <a class="btn btn-send" href="https://mail.google.com/mail/u/0/#drafts?compose=19d66973dcbfa9b7" target="_blank">Review &amp; Send</a>
+      <a class="btn btn-view" href="https://mail.google.com/mail/u/0/#all/19d57e43607864d1" target="_blank">Thread</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <div>
+        <div class="subj">Ondrej Liptak — Priority Clients (Aleph)</div>
+        <div class="meta">ondrej.liptak@dexfinity.com + Aleph team</div>
+        <div class="snip">"Mame tu nieco nove?" — 3 dni bez odpovede.</div>
+      </div>
+      <div><div class="days over">3 dni</div><div class="pri p2">P2</div></div>
+    </div>
+    <div class="actions">
+      <a class="btn btn-view" href="https://mail.google.com/mail/u/0/#all/19c2ecb17b671a17" target="_blank">Open Thread</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <div>
+        <div class="subj">Miro Sajban — Jakub Stopiak</div>
+        <div class="meta">miroslav.sajban@dexfinity.com</div>
+        <div class="snip">"Co si zistil?" — referencia. Draft ready.</div>
+      </div>
+      <div><div class="days over">3 dni</div><div class="pri p3">P3</div></div>
+    </div>
+    <div class="actions">
+      <a class="btn btn-send" href="https://mail.google.com/mail/u/0/#drafts?compose=19d66974563255c5" target="_blank">Review &amp; Send</a>
+      <a class="btn btn-view" href="https://mail.google.com/mail/u/0/#all/19d4d6aa028cd1a8" target="_blank">Thread</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <div>
+        <div class="subj">Zuzka Kapustova — Podcast E34 upload</div>
+        <div class="meta">zuzana.kapustova + nicole.stulajterova</div>
+        <div class="snip">Upload epizody na web + homepage. Draft ready.</div>
+      </div>
+      <div><div class="days over">4 dni</div><div class="pri p2">P2</div></div>
+    </div>
+    <div class="actions">
+      <a class="btn btn-send" href="https://mail.google.com/mail/u/0/#drafts?compose=19d6697538620714" target="_blank">Review &amp; Send</a>
+      <a class="btn btn-view" href="https://mail.google.com/mail/u/0/#all/19d5502a9acdc6e5" target="_blank">Thread</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <div>
+        <div class="subj">Adi Cernackova — Figmy Mamutex</div>
+        <div class="meta">adriana.cernackova + adrian.jarabinsky</div>
+        <div class="snip">Zdielanie Figma pristupov na design@detaility.com. Draft ready.</div>
+      </div>
+      <div><div class="days over">6 dni</div><div class="pri p2">P2</div></div>
+    </div>
+    <div class="actions">
+      <a class="btn btn-send" href="https://mail.google.com/mail/u/0/#drafts?compose=19d66975c6ca0e23" target="_blank">Review &amp; Send</a>
+      <a class="btn btn-view" href="https://mail.google.com/mail/u/0/#all/19d4b443444ed709" target="_blank">Thread</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <div>
+        <div class="subj">Jan Astary — IBO zmenka status</div>
+        <div class="meta">jan.astary@dexfinity.com</div>
+        <div class="snip">"Ako sme na tom s IBOM?"</div>
+      </div>
+      <div><div class="days">1 den</div><div class="pri p2">P2</div></div>
+    </div>
+    <div class="actions">
+      <a class="btn btn-view" href="https://mail.google.com/mail/u/0/#all/19d58d08a0d5006c" target="_blank">Open Thread</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <div>
+        <div class="subj">Matej Astary — Erik nabeh</div>
+        <div class="meta">matej.astary@dexfinity.com</div>
+        <div class="snip">"Ako hodnotis jeho nabeh?"</div>
+      </div>
+      <div><div class="days">1 den</div><div class="pri p3">P3</div></div>
+    </div>
+    <div class="actions">
+      <a class="btn btn-view" href="https://mail.google.com/mail/u/0/#all/19d642d88536d44f" target="_blank">Open Thread</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <div>
+        <div class="subj">Monika Aninova — G Account</div>
+        <div class="meta">monika.aninova@dexfinity.com</div>
+        <div class="snip">Ponechat alebo zrusit ucet? Draft ready.</div>
+      </div>
+      <div><div class="days over">6 dni</div><div class="pri p3">P3</div></div>
+    </div>
+    <div class="actions">
+      <a class="btn btn-send" href="https://mail.google.com/mail/u/0/#drafts?compose=19d669768dc14e53" target="_blank">Review &amp; Send</a>
+      <a class="btn btn-view" href="https://mail.google.com/mail/u/0/#all/19d47d20a8a94f48" target="_blank">Thread</a>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+<div class="footer">
+  Inbox Intelligence v0.1 &bull; DXFNT/inbox-intel<br>
+  Gmail drafts are pre-written — tap "Review & Send" to open in Gmail
+</div>
+
+</body>
+</html>
