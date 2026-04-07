@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mamutex UX Redesign — Status 7.4.2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Poppins',sans-serif;background:#05024E;color:#fff;min-height:100vh;-webkit-font-smoothing:antialiased}
+
+  .hero{padding:40px 24px 32px;background:linear-gradient(135deg,#05024E 0%,#0a0566 50%,#05024E 100%);position:relative;overflow:hidden}
+  .hero::after{content:'';position:absolute;top:-50%;right:-30%;width:80%;height:200%;background:radial-gradient(ellipse,rgba(0,101,247,.08) 0%,transparent 70%);pointer-events:none}
+  .hero .tag{display:inline-block;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#0065F7;background:rgba(0,101,247,.12);border:1px solid rgba(0,101,247,.2);padding:4px 12px;border-radius:20px;margin-bottom:12px}
+  .hero h1{font-size:26px;font-weight:800;line-height:1.2;margin-bottom:6px}
+  .hero h1 span{background:linear-gradient(135deg,#0065F7,#00D4FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .hero .sub{font-size:13px;color:rgba(255,255,255,.45);margin-bottom:20px}
+  .hero .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .kpi{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px 12px;text-align:center}
+  .kpi .v{font-size:22px;font-weight:700;color:#0065F7}
+  .kpi .v.green{color:#4CAF50}
+  .kpi .v.yellow{color:#FFB800}
+  .kpi .l{font-size:9px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.8px;margin-top:2px}
+
+  .content{padding:0 24px 40px}
+
+  .section{margin-top:28px}
+  .section h2{font-size:16px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+  .section h2 .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .dot.red{background:#FF4444}
+  .dot.green{background:#4CAF50}
+  .dot.blue{background:#0065F7}
+  .dot.yellow{background:#FFB800}
+  .dot.purple{background:#9C27B0}
+
+  .timeline{position:relative;padding-left:20px;border-left:2px solid rgba(0,101,247,.15)}
+  .timeline .step{position:relative;margin-bottom:20px;padding-bottom:4px}
+  .timeline .step::before{content:'';position:absolute;left:-25px;top:4px;width:12px;height:12px;border-radius:50%;border:2px solid #0065F7;background:#05024E}
+  .timeline .step.done::before{background:#0065F7;border-color:#0065F7}
+  .timeline .step.active::before{background:#FFB800;border-color:#FFB800;box-shadow:0 0 8px rgba(255,184,0,.4)}
+  .timeline .step .date{font-size:10px;color:rgba(255,255,255,.35);margin-bottom:2px}
+  .timeline .step .title{font-size:13px;font-weight:600;margin-bottom:3px}
+  .timeline .step .desc{font-size:12px;color:rgba(255,255,255,.5);line-height:1.4}
+
+  .card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px;margin-bottom:10px}
+  .card .label{font-size:10px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px}
+  .card .value{font-size:13px;font-weight:500;line-height:1.5}
+  .card .value a{color:#0065F7;text-decoration:none}
+
+  .team{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+  .person{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px}
+  .person .name{font-size:13px;font-weight:600}
+  .person .role{font-size:11px;color:rgba(255,255,255,.4);margin-top:2px}
+  .person .status{display:inline-block;font-size:9px;font-weight:600;padding:2px 6px;border-radius:6px;margin-top:6px}
+  .person .status.active{background:rgba(76,175,80,.15);color:#4CAF50}
+  .person .status.paused{background:rgba(255,184,0,.15);color:#FFB800}
+  .person .status.done{background:rgba(0,101,247,.15);color:#6BA5FF}
+
+  .checklist{list-style:none}
+  .checklist li{font-size:13px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:flex-start;gap:8px;line-height:1.4}
+  .checklist li::before{content:'';flex-shrink:0;width:18px;height:18px;border-radius:5px;border:2px solid rgba(255,255,255,.15);margin-top:1px}
+  .checklist li.done::before{background:#0065F7;border-color:#0065F7;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 8.5l3 3 5-6.5' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-size:12px;background-repeat:no-repeat;background-position:center}
+  .checklist li.done{color:rgba(255,255,255,.35);text-decoration:line-through}
+  .checklist li.active::before{border-color:#FFB800;background:rgba(255,184,0,.15)}
+
+  .footer{text-align:center;padding:24px;font-size:10px;color:rgba(255,255,255,.2)}
+  .footer img{height:20px;opacity:.3;margin-bottom:6px}
+
+  @media(min-width:640px){
+    .hero{padding:48px 40px 36px}
+    .content{padding:0 40px 48px;max-width:720px;margin:0 auto}
+    .hero .kpis{grid-template-columns:repeat(3,1fr)}
+    .team{grid-template-columns:repeat(3,1fr)}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="tag">Project Status</div>
+  <h1>Mamutex.cz <span>UX Redesign</span></h1>
+  <div class="sub">Aktualizováno 7. dubna 2026 &bull; Dexfinity &times; Detaility</div>
+  <div class="kpis">
+    <div class="kpi"><div class="v yellow">In Progress</div><div class="l">Status</div></div>
+    <div class="kpi"><div class="v">Homepage</div><div class="l">Scope</div></div>
+    <div class="kpi"><div class="v">Shoptet</div><div class="l">Platforma</div></div>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- TIMELINE -->
+  <div class="section">
+    <h2><span class="dot blue"></span>Timeline</h2>
+    <div class="timeline">
+      <div class="step done">
+        <div class="date">22. mar 2026</div>
+        <div class="title">UX Analýza &amp; Komentáře (Kvasnička)</div>
+        <div class="desc">500+ komentářů k desktopové verzi. Kompletní UX audit homepage, navigace, kategorií, produktových karet. Základ pro redesign.</div>
+      </div>
+      <div class="step done">
+        <div class="date">22. mar — 30. mar</div>
+        <div class="title">Estimate &amp; Scope Definition</div>
+        <div class="desc">Detaility připravil detailní odhad. Dohodnut pilot: Homepage (desktop + mobil) + design systém. Sadzba 65 EUR/hod.</div>
+      </div>
+      <div class="step done">
+        <div class="date">31. mar — 2. apr</div>
+        <div class="title">Onboarding &amp; Interní Setup</div>
+        <div class="desc">Briefing dizajnéra, review existujícího desktopu, příprava struktury pro mobil, audit komponentov. Figma přístupy nastaveny.</div>
+      </div>
+      <div class="step done">
+        <div class="date">2. apr</div>
+        <div class="title">Reorganizace týmu</div>
+        <div class="desc">Adrián Jarabinský (původní UX) na PNce. Přeorganizováno — zapojen external tým Detaility se zkušenostmi s e-commerce UX. Systém umožňuje paralelní práci více designérů.</div>
+      </div>
+      <div class="step active">
+        <div class="date">3. apr — 8. apr</div>
+        <div class="title">Mobilní Homepage — v realizaci</div>
+        <div class="desc">Senior UX designér (Tomáš Obřimčák) pracuje na mobilní verzi homepage. Loom updaty průběžně. Checkpoint: 8. dubna.</div>
+      </div>
+      <div class="step">
+        <div class="date">TBD</div>
+        <div class="title">Desktop Homepage — dokončení</div>
+        <div class="desc">Desktop je na ~95% z Adriánovy práce. Po dokončení mobilu se doladí zbývající detaily.</div>
+      </div>
+      <div class="step">
+        <div class="date">TBD</div>
+        <div class="title">Design Systém</div>
+        <div class="desc">Barvy, typografie, komponenty. Bude se vyvíjet průběžně s homepage.</div>
+      </div>
+      <div class="step">
+        <div class="date">TBD</div>
+        <div class="title">Klientský Review &amp; Validace</div>
+        <div class="desc">Prezentace výstupů klientovi. Na základě feedbacku rozhodnutí o dalších krocích (košík, kategorie...).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEAM -->
+  <div class="section">
+    <h2><span class="dot green"></span>Tým</h2>
+    <div class="team">
+      <div class="person">
+        <div class="name">Pavol Adamčák</div>
+        <div class="role">Project Lead &bull; Dexfinity</div>
+        <div class="status active">Active</div>
+      </div>
+      <div class="person">
+        <div class="name">Daniel Čeliga</div>
+        <div class="role">UX Strategy &bull; Detaility</div>
+        <div class="status active">Active</div>
+      </div>
+      <div class="person">
+        <div class="name">Tomáš Obřimčák</div>
+        <div class="role">Senior UX Designer &bull; Detaility</div>
+        <div class="status active">Active</div>
+      </div>
+      <div class="person">
+        <div class="name">Jan Kvasnička</div>
+        <div class="role">UX Analýza &amp; Komentáře</div>
+        <div class="status done">Delivered</div>
+      </div>
+      <div class="person">
+        <div class="name">Adriána Černáčková</div>
+        <div class="role">Kreativy &amp; Kampane</div>
+        <div class="status active">Active</div>
+      </div>
+      <div class="person">
+        <div class="name">Adrián Jarabinský</div>
+        <div class="role">Původní UX Desktop</div>
+        <div class="status paused">Na PNce</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CO JE HOTOVO -->
+  <div class="section">
+    <h2><span class="dot green"></span>UX Analýza — rozmenená na drobné</h2>
+    <ul class="checklist">
+      <li class="done">Kompletní UX audit desktopové verze (500+ komentářů)</li>
+      <li class="done">Header &amp; Navigace — desktop review</li>
+      <li class="done">Homepage struktura — desktop layout</li>
+      <li class="done">Produktové karty — UX doporučení</li>
+      <li class="done">Mamutex+ benefity — komunikační koncept</li>
+      <li class="done">Design systém — audit existujících komponentů</li>
+      <li class="done">Estimate &amp; scope definition — pilot dohodnut</li>
+      <li class="done">Tým přeorganizován — Detaility onboarded</li>
+      <li class="active">Mobilní Homepage — Header &amp; Navigace</li>
+      <li class="active">Mobilní Homepage — Hero &amp; Content bloky</li>
+      <li>Mobilní Homepage — Footer &amp; CTA</li>
+      <li>Desktop Homepage — finální doladění (5%)</li>
+      <li>Design Systém — barvy, typografie, komponenty</li>
+      <li>Klientský review &amp; feedback</li>
+      <li>Rozhodnutí o ďalších stránkach (košík, kategorie...)</li>
+    </ul>
+  </div>
+
+  <!-- DELIVERABLES -->
+  <div class="section">
+    <h2><span class="dot purple"></span>Klíčové odkazy</h2>
+    <div class="card">
+      <div class="label">Figma — UX Analýza (Kvasnička)</div>
+      <div class="value"><a href="https://www.figma.com/design/ZRnydfJQYihgeCcNMXZ09q/Mamutex.cz---Analýza-použitelnosti" target="_blank">Mamutex.cz — Analýza použitelnosti</a></div>
+    </div>
+    <div class="card">
+      <div class="label">UX Brief (strukturovaný)</div>
+      <div class="value"><a href="https://palindess.github.io/mamutex-ux-brief/" target="_blank">palindess.github.io/mamutex-ux-brief</a></div>
+    </div>
+    <div class="card">
+      <div class="label">Posledný Loom Update (7.4.)</div>
+      <div class="value"><a href="https://www.loom.com/share/f33cb797e8aa4a299743edef65e2fe47" target="_blank">Daniel Čeliga — Progress Update</a></div>
+    </div>
+  </div>
+
+  <!-- PARALELNE KREATIVY -->
+  <div class="section">
+    <h2><span class="dot yellow"></span>Paralelně běží — Kreativy &amp; Kampane</h2>
+    <ul class="checklist">
+      <li class="done">Pneumatiky &amp; Uskladnění — 3 jazykové verze (CZ/SK/HU) — nasazeno</li>
+      <li class="done">Mamutex+ komunikační koncept — bannery — nasazeno</li>
+      <li class="done">Bestseller regál — produktový banner — nasazeno</li>
+      <li class="done">2T regál — Profi segment koncept — nasazeno</li>
+      <li class="done">4 nová videa (jarní sezóna, AI videa) — nasazeno</li>
+      <li class="done">AI produktové fotografie — v produkci</li>
+      <li class="active">Proficio META tým — kampane běží, testují bannery</li>
+      <li>Jazykové verze videí — CZ/HU potvrzení</li>
+      <li>Web placement kreatív — propojení s UX redesignem</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="footer">
+  Dexfinity &bull; Go Beyond<br>
+  Inbox Intelligence System &bull; Auto-generated 7.4.2026
+</div>
+
+</body>
+</html>
