@@ -52,6 +52,21 @@
   .btn-view:hover{background:rgba(255,255,255,.12)}
   .btn-done{background:rgba(76,175,80,.15);color:#4CAF50;border:1px solid rgba(76,175,80,.25)}
 
+  .dismiss{position:absolute;top:10px;right:10px;width:28px;height:28px;border-radius:50%;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:rgba(255,255,255,.35);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;line-height:1;padding:0}
+  .dismiss:hover{background:rgba(255,68,68,.15);border-color:rgba(255,68,68,.3);color:#FF4444}
+  .dismiss:active{transform:scale(.9)}
+
+  .card.done{opacity:.25;transform:scale(.98);pointer-events:none;transition:all .3s}
+  .card.hiding{animation:slideOut .3s ease forwards}
+
+  @keyframes slideOut{
+    to{opacity:0;max-height:0;padding:0 14px;margin:0;border-color:transparent;overflow:hidden}
+  }
+
+  .show-done{display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:500;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.4);cursor:pointer;margin-bottom:16px;transition:all .15s}
+  .show-done:hover{background:rgba(255,255,255,.08);color:rgba(255,255,255,.6)}
+  .show-done .count{background:rgba(255,255,255,.1);padding:1px 6px;border-radius:10px;font-size:10px}
+
   .divider{height:1px;background:rgba(0,101,247,.12);margin:20px 0}
   .footer{text-align:center;font-size:10px;color:rgba(255,255,255,.2);padding:16px 0}
 
@@ -68,18 +83,21 @@
   <div class="sub">7. april 2026 07:30 CEST &bull; pavol.adamcak@dexfinity.com</div>
 </div>
 
-<div class="stats">
-  <div class="stat red"><div class="n">3</div><div class="l">Urgent</div></div>
-  <div class="stat yellow"><div class="n">11</div><div class="l">Awaiting</div></div>
-  <div class="stat"><div class="n">6</div><div class="l">Drafts Ready</div></div>
-  <div class="stat"><div class="n">5</div><div class="l">Deadlines</div></div>
+<div class="stats" id="stats">
+  <div class="stat red"><div class="n" id="st-urgent">3</div><div class="l">Urgent</div></div>
+  <div class="stat yellow"><div class="n" id="st-awaiting">11</div><div class="l">Awaiting</div></div>
+  <div class="stat"><div class="n" id="st-drafts">6</div><div class="l">Drafts Ready</div></div>
+  <div class="stat"><div class="n" id="st-deadlines">5</div><div class="l">Deadlines</div></div>
 </div>
+
+<button class="show-done" id="toggleDone" onclick="toggleResolved()">Show resolved <span class="count" id="doneCount">0</span></button>
 
 <!-- ==================== DEADLINES ==================== -->
 <div class="section">
   <div class="section-title">Deadlines <span class="badge red">DNES</span></div>
 
-  <div class="card">
+  <div class="card" data-id="gws-renewal">
+    <button class="dismiss" onclick="dismissCard(this)" title="Done">&times;</button>
     <div class="top">
       <div>
         <div class="subj">GWS Renewal — Kinga/FOTC</div>
@@ -94,7 +112,8 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card" data-id="revolut-fee">
+    <button class="dismiss" onclick="dismissCard(this)" title="Done">&times;</button>
     <div class="top">
       <div>
         <div class="subj">Revolut Grow plan fee</div>
@@ -106,7 +125,8 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card" data-id="dex-web-call">
+    <button class="dismiss" onclick="dismissCard(this)" title="Done">&times;</button>
     <div class="top">
       <div>
         <div class="subj">Dexfinity web call — Brunovsky</div>
@@ -117,7 +137,8 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card" data-id="ivanka-zapis">
+    <button class="dismiss" onclick="dismissCard(this)" title="Done">&times;</button>
     <div class="top">
       <div>
         <div class="subj">IVANKA ZS ZAPIS</div>
@@ -128,7 +149,8 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card" data-id="dialnicna-znamka">
+    <button class="dismiss" onclick="dismissCard(this)" title="Done">&times;</button>
     <div class="top">
       <div>
         <div class="subj">Dialnicna znamka BT800EV</div>
@@ -144,7 +166,8 @@
 <div class="section">
   <div class="section-title">External — Awaiting Reply <span class="badge yellow">FOLLOW UP</span></div>
 
-  <div class="card">
+  <div class="card" data-id="mamutex-faktury">
+    <button class="dismiss" onclick="dismissCard(this)" title="Done">&times;</button>
     <div class="top">
       <div>
         <div class="subj">Mamutex — neuhradene faktury</div>
@@ -160,7 +183,8 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card" data-id="bomba-zlava">
+    <button class="dismiss" onclick="dismissCard(this)" title="Done">&times;</button>
     <div class="top">
       <div>
         <div class="subj">Bomba Zlava — pravne urovnanie</div>
@@ -174,7 +198,8 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card" data-id="detaility-mamutex">
+    <button class="dismiss" onclick="dismissCard(this)" title="Done">&times;</button>
     <div class="top">
       <div>
         <div class="subj">Detaility — Mamutex UX Redesign</div>
@@ -188,7 +213,8 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card" data-id="ppc-camp">
+    <button class="dismiss" onclick="dismissCard(this)" title="Done">&times;</button>
     <div class="top">
       <div>
         <div class="subj">PPC camp — vstupenka mena</div>
@@ -207,7 +233,8 @@
 <div class="section">
   <div class="section-title">Internal Team — Awaiting Reply <span class="badge blue">TRACK</span></div>
 
-  <div class="card">
+  <div class="card" data-id="ondrej-plan">
+    <button class="dismiss" onclick="dismissCard(this)" title="Done">&times;</button>
     <div class="top">
       <div>
         <div class="subj">Ondrej Liptak — Plan (Shopify, CreaAI)</div>
@@ -222,7 +249,8 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card" data-id="ondrej-aleph">
+    <button class="dismiss" onclick="dismissCard(this)" title="Done">&times;</button>
     <div class="top">
       <div>
         <div class="subj">Ondrej Liptak — Priority Clients (Aleph)</div>
@@ -236,7 +264,8 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card" data-id="miro-stopiak">
+    <button class="dismiss" onclick="dismissCard(this)" title="Done">&times;</button>
     <div class="top">
       <div>
         <div class="subj">Miro Sajban — Jakub Stopiak</div>
@@ -251,7 +280,8 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card" data-id="zuzka-podcast">
+    <button class="dismiss" onclick="dismissCard(this)" title="Done">&times;</button>
     <div class="top">
       <div>
         <div class="subj">Zuzka Kapustova — Podcast E34 upload</div>
@@ -266,7 +296,8 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card" data-id="adi-figmy">
+    <button class="dismiss" onclick="dismissCard(this)" title="Done">&times;</button>
     <div class="top">
       <div>
         <div class="subj">Adi Cernackova — Figmy Mamutex</div>
@@ -281,7 +312,8 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card" data-id="jano-ibo">
+    <button class="dismiss" onclick="dismissCard(this)" title="Done">&times;</button>
     <div class="top">
       <div>
         <div class="subj">Jan Astary — IBO zmenka status</div>
@@ -295,7 +327,8 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card" data-id="matej-erik">
+    <button class="dismiss" onclick="dismissCard(this)" title="Done">&times;</button>
     <div class="top">
       <div>
         <div class="subj">Matej Astary — Erik nabeh</div>
@@ -309,7 +342,8 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card" data-id="monika-account">
+    <button class="dismiss" onclick="dismissCard(this)" title="Done">&times;</button>
     <div class="top">
       <div>
         <div class="subj">Monika Aninova — G Account</div>
@@ -330,6 +364,80 @@
   Inbox Intelligence v0.1 &bull; DXFNT/inbox-intel<br>
   Gmail drafts are pre-written — tap "Review & Send" to open in Gmail
 </div>
+
+<script>
+const STORAGE_KEY = 'inbox-intel-dismissed';
+
+function getDismissed() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch(e) { return {}; }
+}
+
+function saveDismissed(d) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(d));
+}
+
+function dismissCard(btn) {
+  const card = btn.closest('.card');
+  const id = card.dataset.id;
+  if (!id) return;
+  const d = getDismissed();
+  d[id] = Date.now();
+  saveDismissed(d);
+  card.classList.add('hiding');
+  setTimeout(() => {
+    card.style.display = 'none';
+    card.classList.remove('hiding');
+    card.classList.add('done');
+    updateCounts();
+  }, 300);
+}
+
+function updateCounts() {
+  const all = document.querySelectorAll('.card[data-id]');
+  let active = 0, done = 0;
+  all.forEach(c => {
+    if (c.classList.contains('done') || c.style.display === 'none') done++;
+    else active++;
+  });
+  document.getElementById('doneCount').textContent = done;
+  // update awaiting stat
+  const awaiting = document.querySelectorAll('.card[data-id]:not(.done)');
+  let visibleCount = 0;
+  awaiting.forEach(c => { if (c.style.display !== 'none') visibleCount++; });
+  document.getElementById('st-awaiting').textContent = visibleCount;
+}
+
+let showingDone = false;
+function toggleResolved() {
+  showingDone = !showingDone;
+  const btn = document.getElementById('toggleDone');
+  const cards = document.querySelectorAll('.card.done, .card[style*="display: none"]');
+  cards.forEach(c => {
+    if (showingDone) {
+      c.style.display = '';
+      c.style.opacity = '0.3';
+    } else {
+      c.style.display = 'none';
+      c.style.opacity = '';
+    }
+  });
+  btn.innerHTML = showingDone
+    ? 'Hide resolved <span class="count" id="doneCount">' + document.querySelectorAll('.card.done').length + '</span>'
+    : 'Show resolved <span class="count" id="doneCount">' + document.querySelectorAll('.card.done').length + '</span>';
+}
+
+// On load: restore dismissed state
+(function init() {
+  const d = getDismissed();
+  document.querySelectorAll('.card[data-id]').forEach(card => {
+    if (d[card.dataset.id]) {
+      card.style.display = 'none';
+      card.classList.add('done');
+    }
+  });
+  updateCounts();
+})();
+</script>
 
 </body>
 </html>
