@@ -20,12 +20,21 @@
   .stat.red .n{color:#FF4444}
   .stat.yellow .n{color:#FFB800}
 
-  .section{margin-bottom:24px}
+  .section{margin-bottom:28px;border-left:3px solid rgba(255,255,255,.06);padding-left:12px}
   .section-title{font-size:14px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:6px}
   .badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:12px;font-weight:600}
   .badge.red{background:#FF4444;color:#fff}
   .badge.yellow{background:#FFB800;color:#000}
   .badge.blue{background:#0065F7;color:#fff}
+  .badge.purple{background:#9C27B0;color:#fff}
+  .badge.green{background:#4CAF50;color:#fff}
+
+  .section.s-money{border-left-color:#FF4444}
+  .section.s-deadline{border-left-color:#FFB800}
+  .section.s-external{border-left-color:#FF6D00}
+  .section.s-internal{border-left-color:#0065F7}
+  .section.s-notes{border-left-color:#9C27B0}
+  .section.s-backlog{border-left-color:rgba(255,255,255,.15)}
 
   .card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px;margin-bottom:8px}
   .card .top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
@@ -94,7 +103,7 @@
 <button class="show-done" id="toggleDone" onclick="toggleResolved()">Show resolved <span class="count" id="doneCount">0</span></button>
 
 <!-- ==================== KLIENTI / BILLING ==================== -->
-<div class="section">
+<div class="section s-money">
   <div class="section-title">Klienti &amp; Fakturacia <span class="badge red">MONEY</span></div>
 
   <div class="card" data-id="mamutex-neuhradene">
@@ -163,8 +172,8 @@
 </div>
 
 <!-- ==================== DEADLINES ==================== -->
-<div class="section">
-  <div class="section-title">Deadlines <span class="badge red">DNES</span></div>
+<div class="section s-deadline">
+  <div class="section-title">Deadlines <span class="badge yellow">DNES</span></div>
 
   <div class="card" data-id="gws-renewal">
     <div class="top">
@@ -241,7 +250,7 @@
 </div>
 
 <!-- ==================== EXTERNAL — AWAITING ==================== -->
-<div class="section">
+<div class="section s-external">
   <div class="section-title">External — Awaiting Reply <span class="badge yellow">FOLLOW UP</span></div>
 
   <div class="card" data-id="szabo-bluerank">
@@ -322,7 +331,7 @@
 </div>
 
 <!-- ==================== INTERNAL — AWAITING ==================== -->
-<div class="section">
+<div class="section s-internal">
   <div class="section-title">Internal Team — Awaiting Reply <span class="badge blue">TRACK</span></div>
 
   <div class="card" data-id="ondrej-plan">
@@ -444,8 +453,8 @@
 </div>
 
 <!-- ==================== APPLE NOTES — TASKS ==================== -->
-<div class="section">
-  <div class="section-title">Z tvojich poznamok <span class="badge yellow">NOTES</span></div>
+<div class="section s-notes">
+  <div class="section-title">Z tvojich poznamok <span class="badge purple">NOTES</span></div>
 
   <div class="card" data-id="note-101drogerie">
     <div class="top">
@@ -572,7 +581,7 @@
 </div>
 
 <!-- ==================== OLDER BUT NEEDS YOU ==================== -->
-<div class="section">
+<div class="section s-backlog">
   <div class="section-title">Older but needs YOU <span class="badge yellow">BACKLOG</span></div>
 
   <div class="card" data-id="prosight-byt">
