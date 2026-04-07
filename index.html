@@ -27,7 +27,7 @@
   .badge.yellow{background:#FFB800;color:#000}
   .badge.blue{background:#0065F7;color:#fff}
 
-  .card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px;margin-bottom:8px;position:relative}
+  .card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px;margin-bottom:8px}
   .card .top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
   .card .subj{font-size:14px;font-weight:600;line-height:1.3}
   .card .meta{font-size:11px;color:rgba(255,255,255,.35);margin-top:2px}
@@ -52,9 +52,10 @@
   .btn-view:hover{background:rgba(255,255,255,.12)}
   .btn-done{background:rgba(76,175,80,.15);color:#4CAF50;border:1px solid rgba(76,175,80,.25)}
 
-  .dismiss{position:absolute;top:10px;right:10px;width:28px;height:28px;border-radius:50%;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:rgba(255,255,255,.35);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;line-height:1;padding:0}
-  .dismiss:hover{background:rgba(255,68,68,.15);border-color:rgba(255,68,68,.3);color:#FF4444}
-  .dismiss:active{transform:scale(.9)}
+  .btn-dismiss{display:inline-flex;align-items:center;gap:4px;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:600;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.35);cursor:pointer;transition:all .15s;margin-left:auto}
+  .btn-dismiss:hover{background:rgba(76,175,80,.12);border-color:rgba(76,175,80,.25);color:#4CAF50}
+  .btn-dismiss:active{transform:scale(.97)}
+  .btn-dismiss svg{width:14px;height:14px}
 
   .card.done{opacity:.25;transform:scale(.98);pointer-events:none;transition:all .3s}
   .card.hiding{animation:slideOut .3s ease forwards}
@@ -97,7 +98,6 @@
   <div class="section-title">Deadlines <span class="badge red">DNES</span></div>
 
   <div class="card" data-id="gws-renewal">
-    <button class="dismiss" onclick="dismissCard(this)" title="Done">&times;</button>
     <div class="top">
       <div>
         <div class="subj">GWS Renewal — Kinga/FOTC</div>
@@ -113,7 +113,6 @@
   </div>
 
   <div class="card" data-id="revolut-fee">
-    <button class="dismiss" onclick="dismissCard(this)" title="Done">&times;</button>
     <div class="top">
       <div>
         <div class="subj">Revolut Grow plan fee</div>
@@ -126,7 +125,6 @@
   </div>
 
   <div class="card" data-id="dex-web-call">
-    <button class="dismiss" onclick="dismissCard(this)" title="Done">&times;</button>
     <div class="top">
       <div>
         <div class="subj">Dexfinity web call — Brunovsky</div>
@@ -138,7 +136,6 @@
   </div>
 
   <div class="card" data-id="ivanka-zapis">
-    <button class="dismiss" onclick="dismissCard(this)" title="Done">&times;</button>
     <div class="top">
       <div>
         <div class="subj">IVANKA ZS ZAPIS</div>
@@ -150,7 +147,6 @@
   </div>
 
   <div class="card" data-id="dialnicna-znamka">
-    <button class="dismiss" onclick="dismissCard(this)" title="Done">&times;</button>
     <div class="top">
       <div>
         <div class="subj">Dialnicna znamka BT800EV</div>
@@ -167,7 +163,6 @@
   <div class="section-title">External — Awaiting Reply <span class="badge yellow">FOLLOW UP</span></div>
 
   <div class="card" data-id="mamutex-faktury">
-    <button class="dismiss" onclick="dismissCard(this)" title="Done">&times;</button>
     <div class="top">
       <div>
         <div class="subj">Mamutex — neuhradene faktury</div>
@@ -184,7 +179,6 @@
   </div>
 
   <div class="card" data-id="bomba-zlava">
-    <button class="dismiss" onclick="dismissCard(this)" title="Done">&times;</button>
     <div class="top">
       <div>
         <div class="subj">Bomba Zlava — pravne urovnanie</div>
@@ -199,7 +193,6 @@
   </div>
 
   <div class="card" data-id="detaility-mamutex">
-    <button class="dismiss" onclick="dismissCard(this)" title="Done">&times;</button>
     <div class="top">
       <div>
         <div class="subj">Detaility — Mamutex UX Redesign</div>
@@ -214,7 +207,6 @@
   </div>
 
   <div class="card" data-id="ppc-camp">
-    <button class="dismiss" onclick="dismissCard(this)" title="Done">&times;</button>
     <div class="top">
       <div>
         <div class="subj">PPC camp — vstupenka mena</div>
@@ -234,7 +226,6 @@
   <div class="section-title">Internal Team — Awaiting Reply <span class="badge blue">TRACK</span></div>
 
   <div class="card" data-id="ondrej-plan">
-    <button class="dismiss" onclick="dismissCard(this)" title="Done">&times;</button>
     <div class="top">
       <div>
         <div class="subj">Ondrej Liptak — Plan (Shopify, CreaAI)</div>
@@ -250,7 +241,6 @@
   </div>
 
   <div class="card" data-id="ondrej-aleph">
-    <button class="dismiss" onclick="dismissCard(this)" title="Done">&times;</button>
     <div class="top">
       <div>
         <div class="subj">Ondrej Liptak — Priority Clients (Aleph)</div>
@@ -265,7 +255,6 @@
   </div>
 
   <div class="card" data-id="miro-stopiak">
-    <button class="dismiss" onclick="dismissCard(this)" title="Done">&times;</button>
     <div class="top">
       <div>
         <div class="subj">Miro Sajban — Jakub Stopiak</div>
@@ -281,7 +270,6 @@
   </div>
 
   <div class="card" data-id="zuzka-podcast">
-    <button class="dismiss" onclick="dismissCard(this)" title="Done">&times;</button>
     <div class="top">
       <div>
         <div class="subj">Zuzka Kapustova — Podcast E34 upload</div>
@@ -297,7 +285,6 @@
   </div>
 
   <div class="card" data-id="adi-figmy">
-    <button class="dismiss" onclick="dismissCard(this)" title="Done">&times;</button>
     <div class="top">
       <div>
         <div class="subj">Adi Cernackova — Figmy Mamutex</div>
@@ -313,7 +300,6 @@
   </div>
 
   <div class="card" data-id="jano-ibo">
-    <button class="dismiss" onclick="dismissCard(this)" title="Done">&times;</button>
     <div class="top">
       <div>
         <div class="subj">Jan Astary — IBO zmenka status</div>
@@ -328,7 +314,6 @@
   </div>
 
   <div class="card" data-id="matej-erik">
-    <button class="dismiss" onclick="dismissCard(this)" title="Done">&times;</button>
     <div class="top">
       <div>
         <div class="subj">Matej Astary — Erik nabeh</div>
@@ -343,7 +328,6 @@
   </div>
 
   <div class="card" data-id="monika-account">
-    <button class="dismiss" onclick="dismissCard(this)" title="Done">&times;</button>
     <div class="top">
       <div>
         <div class="subj">Monika Aninova — G Account</div>
@@ -367,14 +351,12 @@
 
 <script>
 const STORAGE_KEY = 'inbox-intel-dismissed';
+const CHECK_SVG = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8.5l3.5 3.5 6.5-8"/></svg>';
 
 function getDismissed() {
   try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch(e) { return {}; }
 }
-
-function saveDismissed(d) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(d));
-}
+function saveDismissed(d) { localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); }
 
 function dismissCard(btn) {
   const card = btn.closest('.card');
@@ -394,47 +376,54 @@ function dismissCard(btn) {
 
 function updateCounts() {
   const all = document.querySelectorAll('.card[data-id]');
-  let active = 0, done = 0;
+  let done = 0, visible = 0;
   all.forEach(c => {
-    if (c.classList.contains('done') || c.style.display === 'none') done++;
-    else active++;
+    if (c.classList.contains('done')) done++; else visible++;
   });
   document.getElementById('doneCount').textContent = done;
-  // update awaiting stat
-  const awaiting = document.querySelectorAll('.card[data-id]:not(.done)');
-  let visibleCount = 0;
-  awaiting.forEach(c => { if (c.style.display !== 'none') visibleCount++; });
-  document.getElementById('st-awaiting').textContent = visibleCount;
+  document.getElementById('st-awaiting').textContent = visible;
 }
 
 let showingDone = false;
 function toggleResolved() {
   showingDone = !showingDone;
-  const btn = document.getElementById('toggleDone');
-  const cards = document.querySelectorAll('.card.done, .card[style*="display: none"]');
-  cards.forEach(c => {
-    if (showingDone) {
-      c.style.display = '';
-      c.style.opacity = '0.3';
-    } else {
-      c.style.display = 'none';
-      c.style.opacity = '';
-    }
+  document.querySelectorAll('.card.done').forEach(c => {
+    c.style.display = showingDone ? '' : 'none';
+    c.style.opacity = showingDone ? '0.3' : '';
   });
-  btn.innerHTML = showingDone
-    ? 'Hide resolved <span class="count" id="doneCount">' + document.querySelectorAll('.card.done').length + '</span>'
-    : 'Show resolved <span class="count" id="doneCount">' + document.querySelectorAll('.card.done').length + '</span>';
+  const count = document.querySelectorAll('.card.done').length;
+  document.getElementById('toggleDone').innerHTML =
+    (showingDone ? 'Hide' : 'Show') + ' resolved <span class="count" id="doneCount">' + count + '</span>';
 }
 
-// On load: restore dismissed state
+// Init: inject dismiss buttons + restore state
 (function init() {
-  const d = getDismissed();
+  const dismissed = getDismissed();
+
   document.querySelectorAll('.card[data-id]').forEach(card => {
-    if (d[card.dataset.id]) {
+    // Ensure card has an actions bar
+    let actions = card.querySelector('.actions');
+    if (!actions) {
+      actions = document.createElement('div');
+      actions.className = 'actions';
+      card.appendChild(actions);
+    }
+
+    // Add dismiss button at the end of actions bar
+    const btn = document.createElement('button');
+    btn.className = 'btn-dismiss';
+    btn.title = 'Vyriesene';
+    btn.innerHTML = CHECK_SVG + ' Done';
+    btn.onclick = function() { dismissCard(this); };
+    actions.appendChild(btn);
+
+    // Restore dismissed state
+    if (dismissed[card.dataset.id]) {
       card.style.display = 'none';
       card.classList.add('done');
     }
   });
+
   updateCounts();
 })();
 </script>
