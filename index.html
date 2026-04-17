@@ -77,6 +77,18 @@
   .show-done:hover{background:rgba(255,255,255,.08);color:rgba(255,255,255,.6)}
   .show-done .count{background:rgba(255,255,255,.1);padding:1px 6px;border-radius:10px;font-size:10px}
 
+  .bookmarks{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+  .bm-group{margin-bottom:12px}
+  .bm-group-title{font-size:11px;font-weight:600;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px}
+  .bm{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:500;text-decoration:none;transition:all .15s;white-space:nowrap}
+  .bm-audit{background:rgba(255,68,68,.08);border:1px solid rgba(255,68,68,.2);color:#FF8A80}
+  .bm-audit:hover{background:rgba(255,68,68,.15);color:#fff}
+  .bm-intel{background:rgba(0,101,247,.08);border:1px solid rgba(0,101,247,.2);color:#6BA5FF}
+  .bm-intel:hover{background:rgba(0,101,247,.15);color:#fff}
+  .bm-project{background:rgba(156,39,176,.08);border:1px solid rgba(156,39,176,.2);color:#CE93D8}
+  .bm-project:hover{background:rgba(156,39,176,.15);color:#fff}
+  .bm-icon{font-size:13px}
+
   .divider{height:1px;background:rgba(0,101,247,.12);margin:20px 0}
   .footer{text-align:center;font-size:10px;color:rgba(255,255,255,.2);padding:16px 0}
 
@@ -90,7 +102,7 @@
 
 <div class="header">
   <h1>Inbox Intelligence</h1>
-  <div class="sub">9. april 2026 07:30 CEST &bull; pavol.adamcak@dexfinity.com</div>
+  <div class="sub">17. april 2026 07:30 CEST &bull; pavol.adamcak@dexfinity.com &bull; <span style="color:#FFB800">⚠ Gmail scan nedostupný (MCP upgrade)</span></div>
 </div>
 
 <div class="stats" id="stats">
@@ -102,6 +114,41 @@
 
 <button class="show-done" id="toggleDone" onclick="toggleResolved()">Show resolved <span class="count" id="doneCount">0</span></button>
 
+<!-- ==================== BOOKMARKS ==================== -->
+<div class="section" style="border-left-color:rgba(0,101,247,.4)">
+  <div class="section-title">Bookmarks <span class="badge blue">QUICK ACCESS</span></div>
+
+  <div class="bm-group">
+    <div class="bm-group-title">Audity klientov</div>
+    <div class="bookmarks">
+      <a class="bm bm-audit" href="../101-drogeria-audit.html" target="_blank"><span class="bm-icon">🔍</span> 101 Drogeria</a>
+      <a class="bm bm-audit" href="../nebshop-audit.html" target="_blank"><span class="bm-icon">🔍</span> Nebshop</a>
+      <a class="bm bm-audit" href="../aquapond-audit-v2.html" target="_blank"><span class="bm-icon">🔍</span> Aquapond v2</a>
+      <a class="bm bm-audit" href="../pneusvet-audit.html" target="_blank"><span class="bm-icon">🔍</span> Pneusvet</a>
+      <a class="bm bm-audit" href="../gws-audit/security-dashboard.html" target="_blank"><span class="bm-icon">🛡</span> GWS Security</a>
+    </div>
+  </div>
+
+  <div class="bm-group">
+    <div class="bm-group-title">Intel & Reporty</div>
+    <div class="bookmarks">
+      <a class="bm bm-intel" href="inbox-digest.html" target="_blank"><span class="bm-icon">📬</span> Inbox Digest</a>
+      <a class="bm bm-intel" href="../lead_scoring_report.html" target="_blank"><span class="bm-icon">📊</span> Lead Scoring</a>
+      <a class="bm bm-intel" href="../mamutex-creative-review.html" target="_blank"><span class="bm-icon">🎨</span> Mamutex Creatives</a>
+    </div>
+  </div>
+
+  <div class="bm-group">
+    <div class="bm-group-title">Projekty</div>
+    <div class="bookmarks">
+      <a class="bm bm-project" href="projects/mamutex-ux-brief.html" target="_blank"><span class="bm-icon">📋</span> Mamutex UX Brief</a>
+      <a class="bm bm-project" href="projects/mamutex-ux-status.html" target="_blank"><span class="bm-icon">📈</span> Mamutex UX Status</a>
+      <a class="bm bm-project" href="../Mamutex_UX_Designer_Brief.html" target="_blank"><span class="bm-icon">✏️</span> UX Designer Brief</a>
+      <a class="bm bm-project" href="../podcast-newsletter-preview.html" target="_blank"><span class="bm-icon">🎙</span> Podcast NL Preview</a>
+    </div>
+  </div>
+</div>
+
 <!-- ==================== KLIENTI / BILLING ==================== -->
 <div class="section s-money">
   <div class="section-title">Klienti &amp; Fakturacia <span class="badge red">MONEY</span></div>
@@ -111,10 +158,10 @@
       <div>
         <div class="subj">Mamutex — neuhradene faktury (jan+feb)</div>
         <div class="meta">radim.bures@mamutex.com &bull; Fakt. 4260053 + 4260035</div>
-        <div class="snip">Po splatnosti od 20.2.2026. Spolu ~9 281 EUR+. Mailsuite: no reply 5 dni. Draft follow-up pripraveny.</div>
-        <div class="hint">Eskalovat ak do stredy nereaguju</div>
+        <div class="snip">Po splatnosti od 20.2.2026. Spolu ~9 281 EUR+. Mailsuite: no reply 13 dni. Draft follow-up pripraveny.</div>
+        <div class="hint">Eskalovat — 13 dni bez odpovede!</div>
       </div>
-      <div><div class="days over">5 dni</div><div class="pri p1">P1</div></div>
+      <div><div class="days over">13 dni</div><div class="pri p1">P1</div></div>
     </div>
     <div class="actions">
       <a class="btn btn-send" href="https://mail.google.com/mail/u/0/#drafts?compose=19d66972b92fd248" target="_blank">Review &amp; Send</a>
@@ -127,10 +174,10 @@
       <div>
         <div class="subj">Mamutex/Proficio — kreativy review + sync call</div>
         <div class="meta">veronika.musilova@proficio.cz + radek.prudil + radim.bures</div>
-        <div class="snip">Poslal si 30.3. komplet kreativy (bannery, videa, Mamutex+, produkt fotky). Veronika: "projdu s META teamom". 7 dni ticho, 25+ opens na Mailsuite. Draft navrhuje call st/pi.</div>
-        <div class="hint">Co je nasadene? Co treba doladit? Jazykove verzie?</div>
+        <div class="snip">Poslal si 30.3. komplet kreativy (bannery, videa, Mamutex+, produkt fotky). Veronika: "projdu s META teamom". 15 dni ticho, 25+ opens na Mailsuite. Draft navrhuje call.</div>
+        <div class="hint">15 dni bez odpovede — eskalovať!</div>
       </div>
-      <div><div class="days over">7 dni</div><div class="pri p1">P1</div></div>
+      <div><div class="days over">15 dni</div><div class="pri p1">P1</div></div>
     </div>
     <div class="actions">
       <a class="btn btn-send" href="https://mail.google.com/mail/u/0/#drafts?compose=19d670ac09c70b69" target="_blank">Review &amp; Send</a>
@@ -159,10 +206,10 @@
       <div>
         <div class="subj">Mamutex UX Redesign — Detaility caka na tvoju reakciu</div>
         <div class="meta">hello@detaility.com (Daniel Celiga)</div>
-        <div class="snip">Daniel odpovedal 2.4. na tvoj feedback ("miskomunikacia co znamena zacat"). Cakas 5 dni — treba rozhodnut ci pokracujete.</div>
+        <div class="snip">Daniel odpovedal 2.4. na tvoj feedback ("miskomunikacia co znamena zacat"). Cakas 15 dni — treba rozhodnut ci pokracujete.</div>
         <div class="hint">Draft: akceptujes vysvetlenie, pytas update na mobil homepage + hodiny</div>
       </div>
-      <div><div class="days over">5 dni</div><div class="pri p2">P2</div></div>
+      <div><div class="days over">15 dni</div><div class="pri p2">P2</div></div>
     </div>
     <div class="actions">
       <a class="btn btn-send" href="https://mail.google.com/mail/u/0/#drafts?compose=19d67a467d29426f" target="_blank">Review &amp; Send</a>
@@ -173,7 +220,7 @@
 
 <!-- ==================== DEADLINES ==================== -->
 <div class="section s-deadline">
-  <div class="section-title">Deadlines <span class="badge yellow">DNES</span></div>
+  <div class="section-title">Deadlines <span class="badge yellow">OVERIT</span></div>
 
   <div class="card" data-id="gws-renewal">
     <div class="top">
@@ -193,83 +240,26 @@
   <div class="card" data-id="revolut-fee">
     <div class="top">
       <div>
-        <div class="subj">Revolut Grow plan fee</div>
+        <div class="subj">Revolut Grow plan fee — OVERIT platbu</div>
         <div class="meta">Revolut Business</div>
-        <div class="snip">Nedostatok na ucte na pokrytie plan fee.</div>
-        <div class="hint">Dobit Revolut ucet do 10. aprila</div>
+        <div class="snip">Deadline bol 10. apríla. Over či bol účet dobitý a poplatok uhradený — ak nie, urobiť hneď.</div>
       </div>
-      <div><div class="days soon">Apr 10</div><div class="pri p1">P1</div></div>
+      <div><div class="days over">7 dni</div><div class="pri p1">P1</div></div>
     </div>
     <div class="actions">
       <a class="btn btn-view" href="https://mail.google.com/mail/u/0/#all/19d654836b87d037" target="_blank">Open Email</a>
     </div>
   </div>
 
-  <div class="card" data-id="dex-web-call">
-    <div class="top">
-      <div>
-        <div class="subj">Dexfinity web call — Brunovsky</div>
-        <div class="meta">pakobrunovsky@gmail.com</div>
-        <div class="snip">Meeting o webe. DNES 9. april 10:00-10:30.</div>
-      </div>
-      <div><div class="days today">DNES!</div><div class="pri p1">P1</div></div>
-    </div>
-    <div class="actions">
-      <a class="btn btn-view" href="https://mail.google.com/mail/u/0/#all/19d4d3c9c3988751" target="_blank">Open Invite</a>
-    </div>
-  </div>
-
-  <div class="card" data-id="shareholders-sync">
-    <div class="top">
-      <div>
-        <div class="subj">Shareholders sync — Jano navrhuje stvrtok 14:30</div>
-        <div class="meta">jan.astary@dexfinity.com &bull; Vyhodnotenie 6M trial</div>
-        <div class="snip">DNES 9.4. 14:30-15:00 (shareholders sync) + 15:00-16:00 (Ebitda trial). Richard Kondáš + Ondrej Lipták potvrdili účasť.</div>
-      </div>
-      <div><div class="days today">DNES!</div><div class="pri p1">P1</div></div>
-    </div>
-    <div class="actions">
-      <a class="btn btn-view" href="https://mail.google.com/mail/u/0/#all/19d69df7c56e9043" target="_blank">Open Invite</a>
-    </div>
-  </div>
-
-  <div class="card" data-id="jano-zatvaranie">
-    <div class="top">
-      <div>
-        <div class="subj">Pavol / Jan — zatvaranie 03.2026</div>
-        <div class="meta">jan.astary@dexfinity.com</div>
-        <div class="snip">Pondelok 13.4. 9:00-9:30. Marcovy report bude v piatok (Jano potvrdil).</div>
-      </div>
-      <div><div class="days soon">Po 13.4.</div><div class="pri p2">P2</div></div>
-    </div>
-    <div class="actions">
-      <a class="btn btn-view" href="https://mail.google.com/mail/u/0/#all/19d69dae8735bd26" target="_blank">Open Invite</a>
-    </div>
-  </div>
-
-  <div class="card" data-id="ivanka-zapis">
-    <div class="top">
-      <div>
-        <div class="subj">IVANKA ZS ZAPIS</div>
-        <div class="meta">Marka &bull; Osobny zapis do skoly</div>
-        <div class="snip">Piatok 10. aprila 14:00-17:00</div>
-      </div>
-      <div><div class="days soon">Apr 10</div><div class="pri p2">P2</div></div>
-    </div>
-    <div class="actions">
-      <a class="btn btn-view" href="https://mail.google.com/mail/u/0/#all/19d593c51b188a4d" target="_blank">Open Invite</a>
-    </div>
-  </div>
-
   <div class="card" data-id="dialnicna-znamka">
     <div class="top">
       <div>
-        <div class="subj">Dialnicna znamka BT800EV</div>
+        <div class="subj">Dialnicna znamka BT800EV — OVERIT obnovenie</div>
         <div class="meta">eznamka.sk</div>
-        <div class="snip">Platnost konci 9. aprila 2026 — DNES! Obnovit ihned na eznamka.sk.</div>
-        <div class="hint">DNES expiruje — OBNOVIT TERAZ!</div>
+        <div class="snip">Platnost expirovala 9. aprila 2026. Over ci bola obnovena — ak nie, obnovit ihned!</div>
+        <div class="hint">Expirovalo 9.4. — over stav!</div>
       </div>
-      <div><div class="days today">DNES!</div><div class="pri p1">P1</div></div>
+      <div><div class="days over">8 dni</div><div class="pri p1">P1</div></div>
     </div>
     <div class="actions">
       <a class="btn btn-view" href="https://mail.google.com/mail/u/0/#all/19d63ae086a0a5bf" target="_blank">Open Email</a>
@@ -284,12 +274,12 @@
   <div class="card" data-id="szabo-bluerank">
     <div class="top">
       <div>
-        <div class="subj">Szabo/Bluerank — CALL piatok 10.4. 13:00</div>
+        <div class="subj">Szabo/Bluerank — follow-up po calle 10.4.</div>
         <div class="meta">szabo@growwwdigital.com + m.galecki + z.nowicki</div>
-        <div class="snip">Laszlo potvrdil piatok 13:00-13:50. Poslal calendar invite. PRIPRAVIT SA na call — synergie Dexfinity x Bluerank x Growww Digital.</div>
-        <div class="hint">Pozajtra 13:00 — pripravit agendu!</div>
+        <div class="snip">Call prebehol 10.4. 13:00-13:50. Over čo vyplynulo — synergie Dexfinity x Bluerank x Growww Digital. Treba follow-up email?</div>
+        <div class="hint">Call bol pred 7 dňami — poslať follow-up ak ešte nebol</div>
       </div>
-      <div><div class="days soon">Pi 10.4.</div><div class="pri p1">P1</div></div>
+      <div><div class="days over">7 dni</div><div class="pri p2">P2</div></div>
     </div>
     <div class="actions">
       <a class="btn btn-view" href="https://mail.google.com/mail/u/0/#all/19d01bd1c6b486c5" target="_blank">Email Thread</a>
@@ -708,9 +698,9 @@
         <div class="subj">GROWNi — Mentee Tomas caka na odpoved!</div>
         <div class="meta">mentoring@growni.sk &bull; 2 remindery (19. + 26. mar)</div>
         <div class="snip">Mentee Tomas stale caka na tvoju odpoved. Druhy reminder bol "caka uz 14 dni". Reputacna vec — odpisat ASAP.</div>
-        <div class="hint">19 dni bez odpovede!</div>
+        <div class="hint">27 dni bez odpovede — kritické pre reputáciu!</div>
       </div>
-      <div><div class="days over">19 dni</div><div class="pri p1">P1</div></div>
+      <div><div class="days over">27 dni</div><div class="pri p1">P1</div></div>
     </div>
     <div class="actions">
       <a class="btn btn-view" href="https://mail.google.com/mail/u/0/#all/19d2b7f5927d19d6" target="_blank">Open Email</a>
@@ -724,7 +714,7 @@
         <div class="meta">roman.kling@telekom.sk &bull; Deadline 31.3. PRESIEL</div>
         <div class="snip">Roman Kling ziada uhradu. Deadline bol 31.3.2026 — uz presiel. Over ci je zaplatene, ak nie deleguj na uctovnictvo.</div>
       </div>
-      <div><div class="days over">11 dni</div><div class="pri p1">P1</div></div>
+      <div><div class="days over">19 dni</div><div class="pri p1">P1</div></div>
     </div>
     <div class="actions">
       <a class="btn btn-view" href="https://mail.google.com/mail/u/0/#all/19d2e33f22679ea8" target="_blank">Open Email</a>
