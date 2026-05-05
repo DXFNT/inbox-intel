@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inbox Intelligence — Pavol Adamcak — 2026-04-07</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: #05024E;
+    color: #fff;
+    padding: 24px;
+    min-height: 100vh;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid rgba(0,101,247,0.3);
+  }
+
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #0065F7, #00D4FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .header .date {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .stat-card {
+    background: rgba(0,101,247,0.1);
+    border: 1px solid rgba(0,101,247,0.2);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+  }
+
+  .stat-card .number {
+    font-size: 32px;
+    font-weight: 700;
+    color: #0065F7;
+  }
+
+  .stat-card .label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .stat-card.urgent .number { color: #FF4444; }
+  .stat-card.warning .number { color: #FFB800; }
+
+  .section {
+    margin-bottom: 32px;
+  }
+
+  .section h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section h2 .badge {
+    background: #FF4444;
+    color: #fff;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+
+  .section h2 .badge.warn { background: #FFB800; color: #000; }
+  .section h2 .badge.info { background: #0065F7; }
+
+  .card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 8px;
+    transition: border-color 0.2s;
+  }
+
+  .card:hover { border-color: #0065F7; }
+
+  .card .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .card .subject {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .card .meta {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+  }
+
+  .card .snippet {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+
+  .priority {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .priority.p1 { background: #FF4444; color: #fff; }
+  .priority.p2 { background: #FFB800; color: #000; }
+  .priority.p3 { background: rgba(0,101,247,0.3); color: #0065F7; }
+
+  .days-ago {
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    white-space: nowrap;
+  }
+
+  .days-ago.overdue { color: #FF4444; }
+  .days-ago.soon { color: #FFB800; }
+
+  .deadline-date {
+    font-size: 13px;
+    font-weight: 600;
+    color: #FFB800;
+  }
+
+  .deadline-date.today { color: #FF4444; }
+
+  .action-hint {
+    font-size: 12px;
+    color: #0065F7;
+    margin-top: 4px;
+    font-style: italic;
+  }
+
+  .divider {
+    height: 1px;
+    background: rgba(0,101,247,0.15);
+    margin: 24px 0;
+  }
+
+  .footer {
+    text-align: center;
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+    margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Inbox Intelligence</h1>
+  <div class="date">Generated: 2026-04-07 07:30 CEST | pavol.adamcak@dexfinity.com</div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-card urgent">
+    <div class="number">3</div>
+    <div class="label">Urgent Deadlines</div>
+  </div>
+  <div class="stat-card warning">
+    <div class="number">12</div>
+    <div class="label">Awaiting Reply</div>
+  </div>
+  <div class="stat-card">
+    <div class="number">4</div>
+    <div class="label">External People</div>
+  </div>
+  <div class="stat-card">
+    <div class="number">8</div>
+    <div class="label">Internal Team</div>
+  </div>
+</div>
+
+<!-- DEADLINES -->
+<div class="section">
+  <h2>Deadlines &amp; Time-Sensitive <span class="badge">ACTION TODAY</span></h2>
+
+  <div class="card">
+    <div class="row">
+      <div>
+        <div class="subject">Revolut — Grow plan fee due</div>
+        <div class="meta">From: Revolut Business</div>
+        <div class="snippet">Nemas dosť penazí na účte na pokrytie plan fee splatného 10. aprila 2026. Treba doplniť.</div>
+        <div class="action-hint">Treba dobit Revolut account ASAP</div>
+      </div>
+      <div>
+        <span class="deadline-date">Apr 10</span><br>
+        <span class="priority p1">P1</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="row">
+      <div>
+        <div class="subject">Google Workspace Renewal — FOTC/Kinga</div>
+        <div class="meta">To: kinga.boruta@fotc.com | Thread active</div>
+        <div class="snippet">Restructure 109 -> 67 licencií. Poslaná zmena včera večer. Kinga musí potvrdiť pred renewal date (7.4.2026 = DNES).</div>
+        <div class="action-hint">Overiť či Kinga potvrdila zmenu — dnes je renewal date!</div>
+      </div>
+      <div>
+        <span class="deadline-date today">DNES!</span><br>
+        <span class="priority p1">P1</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="row">
+      <div>
+        <div class="subject">Dexfinity web call — Martin Brunovsky</div>
+        <div class="meta">Calendar invite from: pakobrunovsky@gmail.com</div>
+        <div class="snippet">Meeting o Dexfinity webe. Štvrtok 9. apríla 10:00-10:30.</div>
+      </div>
+      <div>
+        <span class="deadline-date soon">Apr 9</span><br>
+        <span class="priority p2">P2</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="row">
+      <div>
+        <div class="subject">IVANKA ZS ZAPIS — zápis do školy</div>
+        <div class="meta">Calendar invite from: Mária Adamčáková</div>
+        <div class="snippet">Piatok 10. aprila 14:00-17:00. Osobný zápis.</div>
+      </div>
+      <div>
+        <span class="deadline-date soon">Apr 10</span><br>
+        <span class="priority p2">P2</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="row">
+      <div>
+        <div class="subject">Diaľničná známka BT800EV — expirácia</div>
+        <div class="meta">From: noreply@eznamka.sk</div>
+        <div class="snippet">Notifikácia o expirácii úhrady diaľničnej známky. Treba obnoviť.</div>
+        <div class="action-hint">Obnoviť diaľničnú známku na eznamka.sk</div>
+      </div>
+      <div>
+        <span class="deadline-date soon">Expiring</span><br>
+        <span class="priority p2">P2</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AWAITING REPLY — EXTERNAL -->
+<div class="section">
+  <h2>Awaiting Reply — External <span class="badge warn">FOLLOW UP</span></h2>
+
+  <div class="card">
+    <div class="row">
+      <div>
+        <div class="subject">Mamutex — neuhradené faktúry (jan + feb 2026)</div>
+        <div class="meta">To: radim.bures@mamutex.com, radek.prudil@mamutex.com</div>
+        <div class="snippet">Pripomienka faktúr po splatnosti: 4260053 (jan) splatná 20.2., 4260035 (feb). Spolu ~€9 281+ EUR.</div>
+        <div class="action-hint">5 dní bez odpovede — MONEY na stole. Escalovať?</div>
+      </div>
+      <div>
+        <span class="days-ago overdue">5 dní</span><br>
+        <span class="priority p1">P1</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="row">
+      <div>
+        <div class="subject">PPC camp Slovensko — vymazať mená na vstupenke</div>
+        <div class="meta">To: ppccamp.sk@gmail.com</div>
+        <div class="snippet">Požiadal si Luba o vymazanie mien na vstupenke.</div>
+      </div>
+      <div>
+        <span class="days-ago">1 deň</span><br>
+        <span class="priority p3">P3</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="row">
+      <div>
+        <div class="subject">Get Ryze — Meta Biz Manager hack</div>
+        <div class="meta">To: hello@get-ryze.ai (Ira Bodnar)</div>
+        <div class="snippet">Nahlasuješ hack Meta account — niekto cez ich servis utratil peniaze. Čakáš na vyjadrenie.</div>
+        <div class="action-hint">6 dní bez odpovede — security issue, eskalovať!</div>
+      </div>
+      <div>
+        <span class="days-ago overdue">6 dní</span><br>
+        <span class="priority p1">P1</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="row">
+      <div>
+        <div class="subject">Bomba Zľava — právne urovnanie</div>
+        <div class="meta">To: patus.patrik1@gmail.com, info@bombazlava.sk | CC: kristak@kristak.sk</div>
+        <div class="snippet">Dostal si ďalší právny dokument po tom čo si myslel že je spor urovnaný. Pýtaš sa čo sa deje.</div>
+        <div class="action-hint">6 dní — právna vec, over s Krišťákom stav</div>
+      </div>
+      <div>
+        <span class="days-ago overdue">6 dní</span><br>
+        <span class="priority p2">P2</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="row">
+      <div>
+        <div class="subject">Detaility (Daniel Celiga) — Mamutex UX Redesign</div>
+        <div class="meta">To: hello@detaility.com</div>
+        <div class="snippet">Feedback k hodinám a deliverables — "je veľa hodín ale na konci dňa sme mali urobiť niečo reálne"</div>
+      </div>
+      <div>
+        <span class="days-ago overdue">6 dní</span><br>
+        <span class="priority p2">P2</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="row">
+      <div>
+        <div class="subject">Ryan Bryden — Breakout Group investor intro</div>
+        <div class="meta">From: ryan@webreakoutgroup.com | INBOUND — neodpovedal si!</div>
+        <div class="snippet">Investment groups chcú deploynúť 2-20M, niektorí focus na ecommerce marketing. Pýta sa či máš záujem.</div>
+        <div class="action-hint">5 dní neodpovedané — potenciálne zaujímavý kontakt</div>
+      </div>
+      <div>
+        <span class="days-ago overdue">5 dní</span><br>
+        <span class="priority p2">P2</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AWAITING REPLY — INTERNAL -->
+<div class="section">
+  <h2>Awaiting Reply — Internal Team <span class="badge info">TRACK</span></h2>
+
+  <div class="card">
+    <div class="row">
+      <div>
+        <div class="subject">Ondrej Lipták — Plán na ďalšie mesiace (Shopify, CreaAI, delivery)</div>
+        <div class="meta">To: ondrej.liptak@dexfinity.com | CC: jan.astary, richard.kondas</div>
+        <div class="snippet">Čakáš na jeho pohľad k plánu na ďalšie mesiace — Shopify, CreaAI, delivery.</div>
+      </div>
+      <div>
+        <span class="days-ago overdue">3 dni</span><br>
+        <span class="priority p2">P2</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="row">
+      <div>
+        <div class="subject">Ondrej Lipták — Priority Clients info (Aleph)</div>
+        <div class="meta">To: ondrej.liptak@dexfinity.com | CC: Aleph team</div>
+        <div class="snippet">"Máme tu niečo nové?" — follow-up na Aleph/Priority Clients spreadsheet</div>
+      </div>
+      <div>
+        <span class="days-ago overdue">3 dni</span><br>
+        <span class="priority p2">P2</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="row">
+      <div>
+        <div class="subject">Ondrej Lipták — Transcript Shareholder</div>
+        <div class="meta">To: ondrej.liptak@dexfinity.com</div>
+        <div class="snippet">"Robil si niečo s tou prvou časťou?"</div>
+      </div>
+      <div>
+        <span class="days-ago overdue">3 dni</span><br>
+        <span class="priority p3">P3</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="row">
+      <div>
+        <div class="subject">Miroslav Šajban — Jakub Stopiak referencia</div>
+        <div class="meta">To: miroslav.sajban@dexfinity.com</div>
+        <div class="snippet">"Čo si zistil?" — feedback z callu s Jakubom</div>
+      </div>
+      <div>
+        <span class="days-ago overdue">3 dni</span><br>
+        <span class="priority p3">P3</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="row">
+      <div>
+        <div class="subject">Zuzana Kapustová + Nicole — Podcast E34 upload na web</div>
+        <div class="meta">To: zuzana.kapustova@dexfinity.com, nicole.stulajterova@dexfinity.com</div>
+        <div class="snippet">Upload novej epizódy na podstránku podcastov + homepage.</div>
+      </div>
+      <div>
+        <span class="days-ago overdue">4 dni</span><br>
+        <span class="priority p2">P2</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="row">
+      <div>
+        <div class="subject">Ján Aštary — status IBO zmenka</div>
+        <div class="meta">To: jan.astary@dexfinity.com</div>
+        <div class="snippet">"Ako sme na tom s IBOM?"</div>
+      </div>
+      <div>
+        <span class="days-ago">1 deň</span><br>
+        <span class="priority p2">P2</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="row">
+      <div>
+        <div class="subject">Matej Aštary — Ako sa darí Erikovi?</div>
+        <div class="meta">To: matej.astary@dexfinity.com</div>
+        <div class="snippet">Hodnotenie nábehu nového človeka.</div>
+      </div>
+      <div>
+        <span class="days-ago">1 deň</span><br>
+        <span class="priority p3">P3</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="row">
+      <div>
+        <div class="subject">Adriána Černáčková — Figmy pre Mamutex</div>
+        <div class="meta">To: adriana.cernackova@dexfinity.com + adrian.jarabinsky</div>
+        <div class="snippet">Požiadal si o zdieľanie Figma prístupov na design@detaility.com.</div>
+      </div>
+      <div>
+        <span class="days-ago overdue">6 dní</span><br>
+        <span class="priority p2">P2</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="row">
+      <div>
+        <div class="subject">Monika Aninová — G Account cleanup</div>
+        <div class="meta">To: monika.aninova@dexfinity.com | CC: zuzka.landova</div>
+        <div class="snippet">"Potrebuješ ešte firemný účet?" — jarné upratovanie GWS licencií.</div>
+      </div>
+      <div>
+        <span class="days-ago overdue">6 dní</span><br>
+        <span class="priority p3">P3</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ACTION REQUIRED FROM YOU -->
+<div class="section">
+  <h2>Needs YOUR Reply <span class="badge">YOU OWE REPLY</span></h2>
+
+  <div class="card">
+    <div class="row">
+      <div>
+        <div class="subject">Ryan Bryden — Breakout Group — investor contact</div>
+        <div class="meta">From: ryan@webreakoutgroup.com | Thu Apr 2</div>
+        <div class="snippet">2-20M capital deployment, ecommerce marketing focus. Asks if you're open to a conversation.</div>
+        <div class="action-hint">Odpovedať alebo zavrieť — 5 dní bez reakcie</div>
+      </div>
+      <div>
+        <span class="days-ago overdue">5 dní</span><br>
+        <span class="priority p2">P2</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="row">
+      <div>
+        <div class="subject">Loomly — Facebook analytics failing (OAuth error)</div>
+        <div class="meta">From: support@em.myloomly.com | Fri Apr 3</div>
+        <div class="snippet">FB analytics pre "Dexfinity Go Beyond" zlyhávajú — OAuthException code 190. Treba reconnect.</div>
+        <div class="action-hint">Reconnectnúť FB v Loomly settings</div>
+      </div>
+      <div>
+        <span class="days-ago">4 dni</span><br>
+        <span class="priority p3">P3</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="row">
+      <div>
+        <div class="subject">Eros Alfani — Expansio partnership follow-up</div>
+        <div class="meta">From: erosalfani@thriveexpansio.com | To: Martin Bartl (CC you)</div>
+        <div class="snippet">"Martin - how does this sound?" — partnership follow-up, čaká na Martina/teba</div>
+      </div>
+      <div>
+        <span class="days-ago">5 dní</span><br>
+        <span class="priority p3">P3</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="footer">
+  Inbox Intelligence v0.1 | Built for Pavol Adamcak by Claude Code<br>
+  Powered by Gmail MCP + Google Calendar MCP
+</div>
+
+</body>
+</html>
